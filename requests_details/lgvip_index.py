@@ -26,16 +26,13 @@ def get_page_imgs(url, path,offsets):
                     img.save(path + "/lg_vip{}_{}.png".format(offset, index))
 
 
-
-
-
 def get_zone_detail_lis(basedir, lis):
     for index, item in lis:
         if isinstance(item, Tag):
             city_detail = item.a.string
             city_detail_url = BASE_URL + item.a.get('href')[0:5]+"/page/"+ "{offset}"+ item.a.get('href')[5:]
             path_detail = basedir + "/" + city_detail
-            pool = Pool(12)
+            pool = Pool(5)
             if not os.path.exists(path_detail):
                 os.makedirs(path_detail)
                 # get_page_imgs(city_detail_url, path_detail,[i for i in range(1, 51)])
@@ -48,7 +45,7 @@ def get_zone_detail_lis(basedir, lis):
                 # pool = Pool()
                 # pool.map(get_page_imgs, city_detail_url, [i * 10 for i in range(1, 50)])
                 # get_page_imgs(city_detail_url, path_detail,[i for i in range(1,51)])
-                pool.apply_async(func=get_page_imgs, args=(city_detail_url, path_detail, [i * 10 for i in range(1, 50)]))
+                pool.apply_async(func=get_page_imgs, args=(city_detail_url, path_detail, [i * 10 for i in range(1, 6)]))
                 pool.close()
                 pool.join()
                 # pool.terminate()

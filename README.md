@@ -1,2 +1,4 @@
-# spider_demo
-spider_demo created by python3
+# spider
+spider created by python3
+
+use urllib、requests、beautifulsoup、scrapy...
